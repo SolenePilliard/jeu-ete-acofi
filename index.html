@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La Playlist de l'Été</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sun: #F59E0B;
+      --sun-light: #FEF3C7;
+      --sea: #0EA5E9;
+      --sea-light: #E0F2FE;
+      --sand: #FDE68A;
+      --coral: #FB923C;
+      --green: #10B981;
+      --green-light: #ECFDF5;
+      --bg: #FFFBF0;
+      --card: #FFFFFF;
+      --text: #1C1917;
+      --text-muted: #78716C;
+      --border: rgba(0,0,0,0.08);
+      --border-strong: rgba(0,0,0,0.15);
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      background-image:
+        radial-gradient(circle at 10% 20%, rgba(245,158,11,0.12) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(14,165,233,0.1) 0%, transparent 40%);
+    }
+
+    header {
+      text-align: center;
+      padding: 3rem 1rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header-deco {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .sun-circle {
+      position: absolute;
+      top: -40px; left: 50%;
+      transform: translateX(-50%);
+      width: 160px; height: 160px;
+      background: radial-gradient(circle, rgba(245,158,11,0.25) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .wave {
+      position: absolute;
+      bottom: 0; left: -10%; right: -10%;
+      height: 24px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 24'%3E%3Cpath d='M0 12 C200 0 400 24 600 12 C800 0 1000 24 1200 12 L1200 24 L0 24Z' fill='%230EA5E9' opacity='0.15'/%3E%3C/svg%3E") repeat-x bottom;
+    }
+
+    .eyebrow {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--sun);
+      margin-bottom: 0.5rem;
+    }
+
+    h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.15;
+      margin-bottom: 0.75rem;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--sun);
+    }
+
+    .subtitle {
+      font-size: 15px;
+      color: var(--text-muted);
+      max-width: 480px;
+      margin: 0 auto 1.5rem;
+      line-height: 1.6;
+    }
+
+    .score-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--card);
+      border: 1px solid var(--border-strong);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .score-num {
+      font-family: 'Fraunces', serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    main {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 1rem 1rem 3rem;
+    }
+
+    .song-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.1rem 1.25rem;
+      margin-bottom: 12px;
+      display: grid;
+      grid-template-columns: 40px 1fr auto;
+      align-items: center;
+      gap: 12px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      animation: fadeUp 0.4s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .song-card:nth-child(1) { animation-delay: 0.05s; }
+    .song-card:nth-child(2) { animation-delay: 0.10s; }
+    .song-card:nth-child(3) { animation-delay: 0.15s; }
+    .song-card:nth-child(4) { animation-delay: 0.20s; }
+    .song-card:nth-child(5) { animation-delay: 0.25s; }
+    .song-card:nth-child(6) { animation-delay: 0.30s; }
+    .song-card:nth-child(7) { animation-delay: 0.35s; }
+    .song-card:nth-child(8) { animation-delay: 0.40s; }
+    .song-card:nth-child(9) { animation-delay: 0.45s; }
+    .song-card:nth-child(10) { animation-delay: 0.50s; }
+
+    .song-card.correct {
+      border-color: var(--green);
+      background: var(--green-light);
+    }
+
+    .song-card.wrong {
+      border-color: #F87171;
+      animation: shake 0.35s ease;
+    }
+
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      20% { transform: translateX(-6px); }
+      60% { transform: translateX(6px); }
+    }
+
+    .num-badge {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--sun-light);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Fraunces', serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--sun);
+      flex-shrink: 0;
+    }
+
+    .song-correct .num-badge {
+      background: var(--green-light);
+      color: var(--green);
+    }
+
+    .song-info {
+      min-width: 0;
+    }
+
+    .song-name {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .song-artist {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .card-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .play-btn {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      border: 1px solid var(--border-strong);
+      background: white;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s, border-color 0.15s, transform 0.1s;
+      flex-shrink: 0;
+    }
+
+    .play-btn:hover { background: var(--sun-light); border-color: var(--sun); transform: scale(1.05); }
+    .play-btn.playing { background: var(--sun); border-color: var(--sun); }
+    .play-btn.playing svg { fill: white; }
+
+    .play-btn svg {
+      width: 14px; height: 14px;
+      fill: var(--text-muted);
+      transition: fill 0.15s;
+    }
+
+    .progress-wrap {
+      width: 56px; height: 4px;
+      background: rgba(0,0,0,0.08);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--sun);
+      width: 0%;
+      transition: width 0.5s linear;
+    }
+
+    .song-card.correct .progress-fill { background: var(--green); }
+
+    select {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      padding: 7px 10px;
+      border: 1px solid var(--border-strong);
+      border-radius: 10px;
+      background: white;
+      color: var(--text);
+      cursor: pointer;
+      min-width: 130px;
+      max-width: 160px;
+      outline: none;
+      transition: border-color 0.15s;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2378716C' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      padding-right: 28px;
+    }
+
+    select:focus { border-color: var(--sun); }
+    select:disabled { opacity: 0.6; cursor: default; }
+
+    .check-mark {
+      font-size: 18px;
+      color: var(--green);
+      display: none;
+      flex-shrink: 0;
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-validate {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 11px 28px;
+      background: var(--sun);
+      color: #1C1917;
+      border: none;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: opacity 0.15s, transform 0.1s;
+    }
+
+    .btn-validate:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-validate:active { transform: translateY(0); }
+    .btn-validate:disabled { opacity: 0.4; cursor: default; transform: none; }
+
+    .btn-reset {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      color: var(--text-muted);
+      background: none;
+      border: 1px solid var(--border-strong);
+      border-radius: 100px;
+      padding: 11px 22px;
+      cursor: pointer;
+      transition: background 0.15s;
+      display: none;
+    }
+
+    .btn-reset:hover { background: rgba(0,0,0,0.04); }
+
+    .result-banner {
+      display: none;
+      margin-top: 1rem;
+      padding: 1rem 1.25rem;
+      border-radius: 14px;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .result-banner.success {
+      background: var(--green-light);
+      border: 1px solid #6EE7B7;
+      color: #065F46;
+    }
+
+    .result-banner.partial {
+      background: var(--sun-light);
+      border: 1px solid #FCD34D;
+      color: #92400E;
+    }
+
+    .result-title {
+      font-family: 'Fraunces', serif;
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 12px;
+      color: var(--text-muted);
+      opacity: 0.7;
+    }
+
+    @media (max-width: 520px) {
+      .song-card { grid-template-columns: 36px 1fr; gap: 10px; }
+      .card-controls { grid-column: 1 / -1; justify-content: flex-start; }
+      select { min-width: 120px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-deco">
+    <div class="sun-circle"></div>
+    <div class="wave"></div>
+  </div>
+  <p class="eyebrow">Newsletter de l'été</p>
+  <h1>La playlist de <em>l'été</em></h1>
+  <p class="subtitle">10 collègues, 10 chansons. Écoutez chaque extrait et retrouvez qui l'a choisi.</p>
+  <div class="score-pill">
+    <span>Score :</span>
+    <span class="score-num" id="score">0</span>
+    <span>/ <span id="total">10</span></span>
+  </div>
+</header>
+
+<main>
+  <div id="songs-container"></div>
+
+  <div class="actions">
+    <button class="btn-validate" id="btn-validate" onclick="validateAll()">Valider mes réponses</button>
+    <button class="btn-reset" id="btn-reset" onclick="resetGame()">Recommencer</button>
+  </div>
+
+  <div class="result-banner" id="result-banner">
+    <div class="result-title" id="result-title"></div>
+    <div id="result-text"></div>
+  </div>
+</main>
+
+<footer>Bonne lecture &amp; bel été à tous !</footer>
+
+<script>
+  // ============================================================
+  // CONFIGURATION — À MODIFIER AVEC VOS VRAIES DONNÉES
+  // ============================================================
+  const SONGS = [
+    { id: 1,  title: "Hot in Herre",        artist: "Nelly",          audio: "audio/chanson01.mp3", collab: "Marie D." },
+    { id: 2,  title: "Danza Kuduro",         artist: "Don Omar",       audio: "audio/chanson02.mp3", collab: "Thomas R." },
+    { id: 3,  title: "Sunny Afternoon",      artist: "The Kinks",      audio: "audio/chanson03.mp3", collab: "Sophie L." },
+    { id: 4,  title: "Island in the Sun",    artist: "Weezer",         audio: "audio/chanson04.mp3", collab: "Jules M." },
+    { id: 5,  title: "Été 85",               artist: "Rod Stewart",    audio: "audio/chanson05.mp3", collab: "Camille B." },
+    { id: 6,  title: "Cruel Summer",         artist: "Taylor Swift",   audio: "audio/chanson06.mp3", collab: "Lucas P." },
+    { id: 7,  title: "Summertime Sadness",   artist: "Lana Del Rey",   audio: "audio/chanson07.mp3", collab: "Emma F." },
+    { id: 8,  title: "Kokomo",               artist: "The Beach Boys", audio: "audio/chanson08.mp3", collab: "Antoine G." },
+    { id: 9,  title: "Under the Sun",        artist: "Childish Gambino",audio: "audio/chanson09.mp3", collab: "Léa N." },
+    { id: 10, title: "Walking on Sunshine",  artist: "Katrina & Waves",audio: "audio/chanson10.mp3", collab: "Pierre V." },
+  ];
+  // ============================================================
+
+  const NAMES = [...SONGS.map(s => s.collab)].sort(() => Math.random() - 0.5);
+  let currentAudio = null;
+  let currentPlayBtn = null;
+  let progressInterval = null;
+  let validated = false;
+
+  function renderSongs() {
+    document.getElementById('total').textContent = SONGS.length;
+    const container = document.getElementById('songs-container');
+    container.innerHTML = SONGS.map((song, i) => `
+      <div class="song-card" id="card-${song.id}">
+        <div class="num-badge">${i + 1}</div>
+        <div class="song-info">
+          <div class="song-name">${song.title}</div>
+          <div class="song-artist">${song.artist}</div>
+        </div>
+        <div class="card-controls">
+          <button class="play-btn" id="play-${song.id}" onclick="toggleAudio(${song.id})" title="Écouter l'extrait" aria-label="Écouter ${song.title}">
+            <svg id="icon-${song.id}" viewBox="0 0 16 16"><path d="M4 2l10 6-10 6V2z"/></svg>
+          </button>
+          <div class="progress-wrap"><div class="progress-fill" id="prog-${song.id}"></div></div>
+          <select id="sel-${song.id}" aria-label="Choisir le collègue pour ${song.title}">
+            <option value="">— Qui est-ce ?</option>
+            ${NAMES.map(n => `<option value="${n}">${n}</option>`).join('')}
+          </select>
+          <span class="check-mark" id="chk-${song.id}" aria-hidden="true">✓</span>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function stopCurrent() {
+    if (currentAudio) {
+      currentAudio.pause();
+      currentAudio = null;
+    }
+    if (progressInterval) {
+      clearInterval(progressInterval);
+      progressInterval = null;
+    }
+    if (currentPlayBtn) {
+      const id = currentPlayBtn.dataset.songId;
+      currentPlayBtn.classList.remove('playing');
+      document.getElementById(`icon-${id}`).innerHTML = '<path d="M4 2l10 6-10 6V2z"/>';
+      document.getElementById(`prog-${id}`).style.width = '0%';
+      currentPlayBtn = null;
+    }
+  }
+
+  function toggleAudio(id) {
+    const btn = document.getElementById(`play-${id}`);
+    btn.dataset.songId = id;
+
+    if (currentPlayBtn === btn) { stopCurrent(); return; }
+    stopCurrent();
+
+    const song = SONGS.find(s => s.id === id);
+    const audio = new Audio(song.audio);
+
+    audio.addEventListener('canplay', () => {
+      audio.play().catch(() => {});
+      currentAudio = audio;
+      currentPlayBtn = btn;
+      btn.classList.add('playing');
+      document.getElementById(`icon-${id}`).innerHTML = '<path d="M3 2h3v12H3zm7 0h3v12h-3z"/>';
+
+      let elapsed = 0;
+      progressInterval = setInterval(() => {
+        elapsed += 0.5;
+        const pct = Math.min((elapsed / 30) * 100, 100);
+        document.getElementById(`prog-${id}`).style.width = pct + '%';
+        if (elapsed >= 30) { stopCurrent(); }
+      }, 500);
+    });
+
+    audio.addEventListener('error', () => {
+      btn.style.borderColor = '#FCA5A5';
+      setTimeout(() => btn.style.borderColor = '', 1000);
+    });
+
+    audio.load();
+  }
+
+  function validateAll() {
+    if (validated) return;
+    let correct = 0;
+    let answered = 0;
+
+    SONGS.forEach(song => {
+      const sel = document.getElementById(`sel-${song.id}`);
+      const card = document.getElementById(`card-${song.id}`);
+      const chk = document.getElementById(`chk-${song.id}`);
+      if (!sel.value) return;
+      answered++;
+      card.classList.remove('wrong');
+      void card.offsetWidth;
+      if (sel.value === song.collab) {
+        correct++;
+        card.classList.add('correct');
+        chk.style.display = 'inline';
+        sel.disabled = true;
+      } else {
+        card.classList.add('wrong');
+      }
+    });
+
+    document.getElementById('score').textContent = correct;
+
+    const banner = document.getElementById('result-banner');
+    const title = document.getElementById('result-title');
+    const text = document.getElementById('result-text');
+
+    if (correct === SONGS.length) {
+      banner.className = 'result-banner success';
+      title.textContent = 'Bravo, parfait !';
+      text.textContent = `${correct}/${SONGS.length} — Tu connais vraiment bien tes collègues. Bel été !`;
+      validated = true;
+      document.getElementById('btn-validate').disabled = true;
+    } else {
+      banner.className = 'result-banner partial';
+      title.textContent = `${correct} sur ${answered} correctes`;
+      text.textContent = 'Écoute encore les extraits et modifie tes réponses — tu peux réessayer !';
+    }
+
+    banner.style.display = 'block';
+    document.getElementById('btn-reset').style.display = 'inline-block';
+    banner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function resetGame() {
+    stopCurrent();
+    validated = false;
+    renderSongs();
+    document.getElementById('score').textContent = '0';
+    document.getElementById('result-banner').style.display = 'none';
+    document.getElementById('btn-validate').disabled = false;
+    document.getElementById('btn-reset').style.display = 'none';
+  }
+
+  renderSongs();
+</script>
+</body>
+</html>
