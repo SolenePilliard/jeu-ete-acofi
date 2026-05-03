@@ -435,7 +435,7 @@
             <svg id="icon-${song.id}" viewBox="0 0 16 16"><path d="M4 2l10 6-10 6V2z"/></svg>
           </button>
           <div class="progress-wrap"><div class="progress-fill" id="prog-${song.id}"></div></div>
-          <select id="sel-${song.id}" aria-label="Choisir le collègue pour ${song.title}">
+          <select id="sel-${song.id}" aria-label="Choisir le collègue pour ${song.title}" onchange="updateSelects()">
             <option value="">— Qui est-ce ?</option>
             ${NAMES.map(n => `<option value="${n}">${n}</option>`).join('')}
           </select>
@@ -443,6 +443,22 @@
         </div>
       </div>
     `).join('');
+  }
+
+  function updateSelects() {
+    const selected = SONGS
+      .map(s => document.getElementById(`sel-${s.id}`)?.value)
+      .filter(v => v !== '' && v !== undefined);
+
+    SONGS.forEach(song => {
+      const sel = document.getElementById(`sel-${song.id}`);
+      if (!sel || sel.disabled) return;
+      const current = sel.value;
+      Array.from(sel.options).forEach(opt => {
+        if (opt.value === '') return;
+        opt.disabled = selected.includes(opt.value) && opt.value !== current;
+      });
+    });
   }
 
   function stopCurrent() {
