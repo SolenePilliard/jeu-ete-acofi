@@ -542,17 +542,22 @@
     const title = document.getElementById('result-title');
     const text = document.getElementById('result-text');
 
+    const phrases = [
+      { max: 2,  emoji: "😅", titre: "Aïe...",            phrase: "Tu passes trop de temps en réunion et pas assez à la machine à café !" },
+      { max: 5,  emoji: "😄", titre: "Pas mal !",          phrase: "Tu connais quelques visages... mais les prénoms c'est une autre histoire." },
+      { max: 8,  emoji: "👀", titre: "Belle performance !", phrase: "Tu traînes clairement à la pause déj — et ça se voit !" },
+      { max: 10, emoji: "🕵️", titre: "Expert(e) ACOFI certifié(e) !", phrase: "Soit tu connais vraiment tout le monde, soit tu as triché. On ne juge pas." },
+    ];
+    const level = phrases.find(p => correct <= p.max);
+
     if (correct === SONGS.length) {
-      banner.className = 'result-banner success';
-      title.textContent = 'Bravo, parfait !';
-      text.textContent = `${correct}/${SONGS.length} — Tu connais vraiment bien tes collègues. Bel été !`;
       validated = true;
       document.getElementById('btn-validate').disabled = true;
-    } else {
-      banner.className = 'result-banner partial';
-      title.textContent = `${correct} sur ${answered} correctes`;
-      text.textContent = 'Écoute encore les extraits et modifie tes réponses — tu peux réessayer !';
     }
+
+    banner.className = correct === SONGS.length ? 'result-banner success' : 'result-banner partial';
+    title.textContent = `${level.emoji} ${correct}/${SONGS.length} — ${level.titre}`;
+    text.textContent = level.phrase;
 
     banner.style.display = 'block';
     document.getElementById('btn-reset').style.display = 'inline-block';
