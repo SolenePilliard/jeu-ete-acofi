@@ -106,7 +106,7 @@
 
     .level-header {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 12px;
@@ -126,10 +126,18 @@
     }
 
     .level-nicoise .level-title { color: #65a30d; }
-    .level-barbecue .level-title { color: #ea580c; }
+    .level-sangria .level-title { color: #dc2626; }
 
     .level-nicoise .level-header { border-color: #d9f99d; }
-    .level-barbecue .level-header { border-color: #fed7aa; }
+    .level-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 4px;
+      font-style: italic;
+      max-width: 480px;
+      line-height: 1.5;
+    }
+    .level-sangria .level-header { border-color: #fecaca; }
 
     .score-pill {
       display: inline-flex;
@@ -193,7 +201,7 @@
       flex-shrink: 0;
     }
 
-    .level-barbecue .num-badge { background: #FFF7ED; color: #ea580c; }
+    .level-sangria .num-badge { background: #FFF1F2; color: #dc2626; }
 
     .song-card.correct .num-badge { background: var(--green-light); color: var(--green); }
 
@@ -293,7 +301,7 @@
       transition: opacity 0.15s, transform 0.1s;
     }
 
-    .level-barbecue .btn-validate { background: var(--coral); }
+    .level-sangria .btn-validate { background: var(--coral); }
 
     .btn-validate:hover { opacity: 0.88; transform: translateY(-1px); }
     .btn-validate:active { transform: translateY(0); }
@@ -382,7 +390,10 @@
   <!-- NIVEAU 1 : SALADE NIÇOISE -->
   <div class="level-section level-nicoise">
     <div class="level-header">
-      <div class="level-title">🥗 Niveau Salade Niçoise</div>
+      <div>
+        <div class="level-title">🥗 Niveau Salade Niçoise</div>
+        <p class="level-desc">Comme une vraie niçoise, y'a de tout dans ce niveau : du disco suédois, de l'amapiano sud-africain, du coupé-décalé ivoirien, du reggaeton et de la pop mainstream. Des ingrédients qui n'ont rien à faire ensemble... et pourtant ça fonctionne.</p>
+      </div>
       <div class="score-pill">
         Score : <span class="score-num" id="score-1">0</span> / <span id="total-1">10</span>
       </div>
@@ -401,16 +412,19 @@
   <div class="level-divider">🌊 &nbsp; Prêt(e) pour le niveau supérieur ? &nbsp; 🔥</div>
 
   <!-- NIVEAU 2 : BARBECUE -->
-  <div class="level-section level-barbecue">
+  <div class="level-section level-sangria">
     <div class="level-header">
-      <div class="level-title">🔥 Niveau Barbecue</div>
+      <div>
+        <div class="level-title">🍹 Niveau Sangria</div>
+        <p class="level-desc">Comme une sangria : du reggaeton espagnol, du dancehall, du rap marseillais, de l'afro-urban et même du rock alternatif. Personne ne sait vraiment ce qu'il y a dedans... mais tout le monde redemande un verre.</p>
+      </div>
       <div class="score-pill">
         Score : <span class="score-num" id="score-2">0</span> / <span id="total-2">10</span>
       </div>
     </div>
     <div id="songs-2"></div>
     <div class="actions">
-      <button class="btn-validate level-barbecue" id="btn-validate-2" onclick="validateLevel(2)">Valider mes réponses</button>
+      <button class="btn-validate level-sangria" id="btn-validate-2" onclick="validateLevel(2)">Valider mes réponses</button>
       <button class="btn-reset" id="btn-reset-2" onclick="resetLevel(2)">Recommencer</button>
     </div>
     <div class="result-banner" id="banner-2">
@@ -421,32 +435,32 @@
 
 </main>
 
-<footer>On vous souhaite un bel été à tous !</footer>
+<footer>Bonne lecture &amp; bel été à tous !</footer>
 
 <script>
   // ============================================================
   // CONFIGURATION — À MODIFIER AVEC VOS VRAIES DONNÉES
   // ============================================================
   const LEVEL1 = [
-    { id: 1,  title: "Lay All Your Love On Me",        artist: "ABBA",                          audio: "audio/chanson01.mp3", collab: "Alexis Nguyen" },
-    { id: 2,  title: "Chanson 02",                     artist: "Artiste 02",                    audio: "audio/chanson02.mp3", collab: "Aurélie Audo" },
-    { id: 3,  title: "Storm II",                       artist: "Genera8ion",                    audio: "audio/chanson03.mp3", collab: "Aurélie Bernable" },
-    { id: 4,  title: "Goon Flavour, Master KG & Eemoh", artist: "Ngishutheni",                   audio: "audio/chanson04.mp3", collab: "Christophe Garnier" },
-    { id: 5,  title: "Pilé",                           artist: "Mauvais Djo",                   audio: "audio/chanson05.mp3", collab: "Daniel Miyavanga" },
-    { id: 6,  title: "Beauty and a Beat",              artist: "Justin Bieber & Nicki Minaj",   audio: "audio/chanson06.mp3", collab: "Laetitia Lemoine" },
-    { id: 7,  title: "Soleil Bleu",                    artist: "Bleu Soleil & Luiza",           audio: "audio/chanson07.mp3", collab: "Laetitia Vicente" },
-    { id: 8,  title: "Chanson 08",                     artist: "Artiste 08",                    audio: "audio/chanson08.mp3", collab: "Laurellène Dérambure" },
-    { id: 9,  title: "Ritmo",                          artist: "The Black Eyed Peas & J.Balvin",audio: "audio/chanson09.mp3", collab: "Michel Pastural" },
-    { id: 10, title: "Baile INoLVIDABLE",              artist: "Bad Bunny",                     audio: "audio/chanson10.mp3", collab: "Sébastien Bloch" },
+    { id: 1,  title: "Lay All Your Love On Me", artist: "ABBA",                          audio: "audio/chanson01.mp3", collab: "Alexis Nguyen" },
+    { id: 2,  title: "Chanson 10",              artist: "Chanson 10",                    audio: "audio/chanson02.mp3", collab: "Aurélie Audo" },
+    { id: 3,  title: "Storm II",                artist: "Genera8ion",                    audio: "audio/chanson03.mp3", collab: "Aurélie Bernable" },
+    { id: 4,  title: "Goon Flavour",            artist: "Master KG & Eemoh, Ngishutheni",audio: "audio/chanson04.mp3", collab: "Christophe Garnier" },
+    { id: 5,  title: "Pilé",                    artist: "Mauvais Djo",                   audio: "audio/chanson05.mp3", collab: "Daniel Miyavanga" },
+    { id: 6,  title: "Beauty and a Beat",       artist: "Justin Bieber & Nicki Minaj",   audio: "audio/chanson06.mp3", collab: "Laetitia Lemoine" },
+    { id: 7,  title: "Soleil Bleu",             artist: "Bleu Soleil & Luiza",           audio: "audio/chanson07.mp3", collab: "Laetitia Vicente" },
+    { id: 8,  title: "Chanson 9",               artist: "Chanson 9",                     audio: "audio/chanson08.mp3", collab: "Laurellène Dérambure" },
+    { id: 9,  title: "Ritmo",                   artist: "Black Eyed Peas",               audio: "audio/chanson09.mp3", collab: "Michel Pastural" },
+    { id: 10, title: "Baile INoLVIDABLE",       artist: "Bad Bunny",                     audio: "audio/chanson10.mp3", collab: "Sébastien Bloch" },
   ];
 
   const LEVEL2 = [
-    { id: 11, title: "À l'aise",                      artist: "Triangle des Bermudes ft L2b",  audio: "audio/chanson11.mp3", collab: "Chaney Kitoko" },
+    { id: 11, title: "À l'aise",                      artist: "Triangle des Bermudes ft L2b", audio: "audio/chanson11.mp3", collab: "Chaney Kitoko" },
     { id: 12, title: "DtMF",                           artist: "Bad Bunny",                    audio: "audio/chanson12.mp3", collab: "Clara Kenig" },
     { id: 13, title: "Limbo",                          artist: "Daddy Yankee",                 audio: "audio/chanson13.mp3", collab: "Coralie Colin" },
     { id: 14, title: "Somebody That I Used To Know",   artist: "Three Days Grace",             audio: "audio/chanson14.mp3", collab: "Dorian Viglione" },
     { id: 15, title: "Mas Cara",                       artist: "Bad Gyal",                     audio: "audio/chanson15.mp3", collab: "Emilie" },
-    { id: 16, title: "Chanson 16",                     artist: "Artiste 16",                   audio: "audio/chanson16.mp3", collab: "Loubna El Msakad" },
+    { id: 16, title: "Chanson 10",                     artist: "Chanson 10",                   audio: "audio/chanson16.mp3", collab: "Loubna El Msakad" },
     { id: 17, title: "Favorita",                       artist: "Ozuna",                        audio: "audio/chanson17.mp3", collab: "Manon Thoumieux" },
     { id: 18, title: "Sous la lune",                   artist: "JUL",                          audio: "audio/chanson18.mp3", collab: "Pénéloppe Guillemin" },
     { id: 19, title: "Water",                          artist: "Tyla",                         audio: "audio/chanson19.mp3", collab: "Vélizar Il Chev" },
