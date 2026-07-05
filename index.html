@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>La Playlist de l'Été</title>
+  <title>La Playlist de l'Été — ACOFI News Summer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
   <style>
@@ -12,10 +12,8 @@
     :root {
       --sun: #F59E0B;
       --sun-light: #FEF3C7;
-      --sea: #0EA5E9;
-      --sea-light: #E0F2FE;
-      --sand: #FDE68A;
       --coral: #FB923C;
+      --coral-light: #FFF7ED;
       --green: #10B981;
       --green-light: #ECFDF5;
       --bg: #FFFBF0;
@@ -33,7 +31,7 @@
       min-height: 100vh;
       background-image:
         radial-gradient(circle at 10% 20%, rgba(245,158,11,0.12) 0%, transparent 40%),
-        radial-gradient(circle at 90% 80%, rgba(14,165,233,0.1) 0%, transparent 40%);
+        radial-gradient(circle at 90% 80%, rgba(251,146,60,0.1) 0%, transparent 40%);
     }
 
     header {
@@ -85,84 +83,97 @@
       margin-bottom: 0.75rem;
     }
 
-    h1 em {
-      font-style: italic;
-      color: var(--sun);
-    }
+    h1 em { font-style: italic; color: var(--sun); }
 
     .subtitle {
       font-size: 15px;
       color: var(--text-muted);
-      max-width: 480px;
       margin: 0 auto 1.5rem;
       line-height: 1.6;
-    }
-
-    .score-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--card);
-      border: 1px solid var(--border-strong);
-      border-radius: 100px;
-      padding: 6px 16px;
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--text-muted);
-    }
-
-    .score-num {
-      font-family: 'Fraunces', serif;
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--text);
+      white-space: nowrap;
     }
 
     main {
-      max-width: 680px;
+      max-width: 720px;
       margin: 0 auto;
       padding: 1rem 1rem 3rem;
     }
 
+    /* ── LEVEL SECTION ── */
+    .level-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .level-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .level-title {
+      font-family: 'Fraunces', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .level-nicoise .level-title { color: #65a30d; }
+    .level-barbecue .level-title { color: #ea580c; }
+
+    .level-nicoise .level-header { border-color: #d9f99d; }
+    .level-barbecue .level-header { border-color: #fed7aa; }
+
+    .score-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--card);
+      border: 1px solid var(--border-strong);
+      border-radius: 100px;
+      padding: 5px 14px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .score-num {
+      font-family: 'Fraunces', serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    /* ── SONG CARD ── */
     .song-card {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 1.1rem 1.25rem;
-      margin-bottom: 12px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 10px;
       display: grid;
-      grid-template-columns: 40px 1fr auto;
+      grid-template-columns: 36px 1fr auto;
       align-items: center;
       gap: 12px;
-      transition: border-color 0.2s, box-shadow 0.2s;
+      transition: border-color 0.2s;
       animation: fadeUp 0.4s ease both;
     }
 
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(12px); }
+      from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    .song-card:nth-child(1) { animation-delay: 0.05s; }
-    .song-card:nth-child(2) { animation-delay: 0.10s; }
-    .song-card:nth-child(3) { animation-delay: 0.15s; }
-    .song-card:nth-child(4) { animation-delay: 0.20s; }
-    .song-card:nth-child(5) { animation-delay: 0.25s; }
-    .song-card:nth-child(6) { animation-delay: 0.30s; }
-    .song-card:nth-child(7) { animation-delay: 0.35s; }
-    .song-card:nth-child(8) { animation-delay: 0.40s; }
-    .song-card:nth-child(9) { animation-delay: 0.45s; }
-    .song-card:nth-child(10) { animation-delay: 0.50s; }
-
-    .song-card.correct {
-      border-color: var(--green);
-      background: var(--green-light);
-    }
-
-    .song-card.wrong {
-      border-color: #F87171;
-      animation: shake 0.35s ease;
-    }
+    .song-card.correct { border-color: var(--green); background: var(--green-light); }
+    .song-card.wrong { border-color: #F87171; animation: shake 0.35s ease; }
 
     @keyframes shake {
       0%,100% { transform: translateX(0); }
@@ -171,25 +182,22 @@
     }
 
     .num-badge {
-      width: 36px; height: 36px;
+      width: 34px; height: 34px;
       border-radius: 50%;
       background: var(--sun-light);
       display: flex; align-items: center; justify-content: center;
       font-family: 'Fraunces', serif;
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 600;
       color: var(--sun);
       flex-shrink: 0;
     }
 
-    .song-correct .num-badge {
-      background: var(--green-light);
-      color: var(--green);
-    }
+    .level-barbecue .num-badge { background: #FFF7ED; color: #ea580c; }
 
-    .song-info {
-      min-width: 0;
-    }
+    .song-card.correct .num-badge { background: var(--green-light); color: var(--green); }
+
+    .song-info { min-width: 0; }
 
     .song-name {
       font-size: 14px;
@@ -214,7 +222,7 @@
     }
 
     .play-btn {
-      width: 38px; height: 38px;
+      width: 36px; height: 36px;
       border-radius: 50%;
       border: 1px solid var(--border-strong);
       background: white;
@@ -227,33 +235,22 @@
     .play-btn:hover { background: var(--sun-light); border-color: var(--sun); transform: scale(1.05); }
     .play-btn.playing { background: var(--sun); border-color: var(--sun); }
     .play-btn.playing svg { fill: white; }
-
-    .play-btn svg {
-      width: 14px; height: 14px;
-      fill: var(--text-muted);
-      transition: fill 0.15s;
-    }
+    .play-btn svg { width: 13px; height: 13px; fill: var(--text-muted); transition: fill 0.15s; }
 
     .progress-wrap {
-      width: 56px; height: 4px;
+      width: 50px; height: 4px;
       background: rgba(0,0,0,0.08);
       border-radius: 2px;
       overflow: hidden;
     }
 
-    .progress-fill {
-      height: 100%;
-      background: var(--sun);
-      width: 0%;
-      transition: width 0.5s linear;
-    }
-
+    .progress-fill { height: 100%; background: var(--sun); width: 0%; transition: width 0.5s linear; }
     .song-card.correct .progress-fill { background: var(--green); }
 
     select {
       font-family: 'DM Sans', sans-serif;
       font-size: 13px;
-      padding: 7px 10px;
+      padding: 6px 28px 6px 10px;
       border: 1px solid var(--border-strong);
       border-radius: 10px;
       background: white;
@@ -267,24 +264,19 @@
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2378716C' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
       background-position: right 10px center;
-      padding-right: 28px;
     }
 
     select:focus { border-color: var(--sun); }
     select:disabled { opacity: 0.6; cursor: default; }
 
-    .check-mark {
-      font-size: 18px;
-      color: var(--green);
-      display: none;
-      flex-shrink: 0;
-    }
+    .check-mark { font-size: 16px; color: var(--green); display: none; flex-shrink: 0; }
 
+    /* ── ACTIONS & BANNER ── */
     .actions {
       display: flex;
       align-items: center;
       gap: 12px;
-      margin-top: 1.5rem;
+      margin-top: 1.25rem;
       flex-wrap: wrap;
     }
 
@@ -292,7 +284,7 @@
       font-family: 'DM Sans', sans-serif;
       font-size: 14px;
       font-weight: 500;
-      padding: 11px 28px;
+      padding: 10px 26px;
       background: var(--sun);
       color: #1C1917;
       border: none;
@@ -300,6 +292,8 @@
       cursor: pointer;
       transition: opacity 0.15s, transform 0.1s;
     }
+
+    .level-barbecue .btn-validate { background: var(--coral); }
 
     .btn-validate:hover { opacity: 0.88; transform: translateY(-1px); }
     .btn-validate:active { transform: translateY(0); }
@@ -312,7 +306,7 @@
       background: none;
       border: 1px solid var(--border-strong);
       border-radius: 100px;
-      padding: 11px 22px;
+      padding: 10px 20px;
       cursor: pointer;
       transition: background 0.15s;
       display: none;
@@ -329,23 +323,30 @@
       line-height: 1.5;
     }
 
-    .result-banner.success {
-      background: var(--green-light);
-      border: 1px solid #6EE7B7;
-      color: #065F46;
-    }
-
-    .result-banner.partial {
-      background: var(--sun-light);
-      border: 1px solid #FCD34D;
-      color: #92400E;
-    }
+    .result-banner.success { background: var(--green-light); border: 1px solid #6EE7B7; color: #065F46; }
+    .result-banner.partial { background: var(--sun-light); border: 1px solid #FCD34D; color: #92400E; }
 
     .result-title {
       font-family: 'Fraunces', serif;
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 600;
       margin-bottom: 4px;
+    }
+
+    .level-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 2rem 0;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    .level-divider::before, .level-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border-strong);
     }
 
     footer {
@@ -357,9 +358,10 @@
     }
 
     @media (max-width: 520px) {
-      .song-card { grid-template-columns: 36px 1fr; gap: 10px; }
+      .song-card { grid-template-columns: 32px 1fr; gap: 8px; }
       .card-controls { grid-column: 1 / -1; justify-content: flex-start; }
-      select { min-width: 120px; }
+      select { min-width: 110px; }
+      .subtitle { white-space: normal; }
     }
   </style>
 </head>
@@ -372,26 +374,51 @@
   </div>
   <p class="eyebrow">ACOFI NEWS SUMMER</p>
   <h1>La playlist de <em>l'été</em></h1>
-  <p class="subtitle" style="white-space: nowrap; max-width: none;">10 collègues, 10 chansons. Écoutez chaque extrait et retrouvez qui l'a choisi.</p>
-  <div class="score-pill">
-    <span>Score :</span>
-    <span class="score-num" id="score">0</span>
-    <span>/ <span id="total">10</span></span>
-  </div>
+  <p class="subtitle">20 collègues, 20 chansons, 2 niveaux. Écoutez chaque extrait et retrouvez qui l'a choisi.</p>
 </header>
 
 <main>
-  <div id="songs-container"></div>
 
-  <div class="actions">
-    <button class="btn-validate" id="btn-validate" onclick="validateAll()">Valider mes réponses</button>
-    <button class="btn-reset" id="btn-reset" onclick="resetGame()">Recommencer</button>
+  <!-- NIVEAU 1 : SALADE NIÇOISE -->
+  <div class="level-section level-nicoise">
+    <div class="level-header">
+      <div class="level-title">🥗 Niveau Salade Niçoise</div>
+      <div class="score-pill">
+        Score : <span class="score-num" id="score-1">0</span> / <span id="total-1">10</span>
+      </div>
+    </div>
+    <div id="songs-1"></div>
+    <div class="actions">
+      <button class="btn-validate" id="btn-validate-1" onclick="validateLevel(1)">Valider mes réponses</button>
+      <button class="btn-reset" id="btn-reset-1" onclick="resetLevel(1)">Recommencer</button>
+    </div>
+    <div class="result-banner" id="banner-1">
+      <div class="result-title" id="banner-title-1"></div>
+      <div id="banner-text-1"></div>
+    </div>
   </div>
 
-  <div class="result-banner" id="result-banner">
-    <div class="result-title" id="result-title"></div>
-    <div id="result-text"></div>
+  <div class="level-divider">🌊 &nbsp; Prêt(e) pour le niveau supérieur ? &nbsp; 🔥</div>
+
+  <!-- NIVEAU 2 : BARBECUE -->
+  <div class="level-section level-barbecue">
+    <div class="level-header">
+      <div class="level-title">🔥 Niveau Barbecue</div>
+      <div class="score-pill">
+        Score : <span class="score-num" id="score-2">0</span> / <span id="total-2">10</span>
+      </div>
+    </div>
+    <div id="songs-2"></div>
+    <div class="actions">
+      <button class="btn-validate level-barbecue" id="btn-validate-2" onclick="validateLevel(2)">Valider mes réponses</button>
+      <button class="btn-reset" id="btn-reset-2" onclick="resetLevel(2)">Recommencer</button>
+    </div>
+    <div class="result-banner" id="banner-2">
+      <div class="result-title" id="banner-title-2"></div>
+      <div id="banner-text-2"></div>
+    </div>
   </div>
+
 </main>
 
 <footer>Bonne lecture &amp; bel été à tous !</footer>
@@ -400,57 +427,95 @@
   // ============================================================
   // CONFIGURATION — À MODIFIER AVEC VOS VRAIES DONNÉES
   // ============================================================
-  const SONGS = [
-    { id: 1,  title: "Chanel",               artist: "Tyla",                       audio: "audio/chanson01.mp3", collab: "Marie D." },
-    { id: 2,  title: "Tití Me Preguntó",     artist: "Bad Bunny",                  audio: "audio/chanson02.mp3", collab: "Thomas R." },
-    { id: 3,  title: "Soleil Bleu",          artist: "Bleu Soleil x Luiza",        audio: "audio/chanson03.mp3", collab: "Sophie L." },
-    { id: 4,  title: "Le temps est bon",     artist: "Bon Entendeur",              audio: "audio/chanson04.mp3", collab: "Jules M." },
-    { id: 5,  title: "One dance",            artist: "Drake",                      audio: "audio/chanson05.mp3", collab: "Camille B." },
-    { id: 6,  title: "Cruel Summer",         artist: "Taylor Swift",               audio: "audio/chanson06.mp3", collab: "Lucas P." },
-    { id: 7,  title: "Summertime Sadness",   artist: "Lana Del Rey",               audio: "audio/chanson07.mp3", collab: "Emma F." },
-    { id: 8,  title: "Surfin USA",           artist: "The Beach Boys",             audio: "audio/chanson08.mp3", collab: "Antoine G." },
-    { id: 9,  title: "Where is my husband !",artist: "Raye",                       audio: "audio/chanson09.mp3", collab: "Léa N." },
-    { id: 10, title: "Walking on Sunshine",  artist: "Katrina & Waves",            audio: "audio/chanson10.mp3", collab: "Pierre V." },
+  const LEVEL1 = [
+    { id: 1,  title: "Lay All Your Love On Me", artist: "ABBA",                          audio: "audio/chanson01.mp3", collab: "Alexis Nguyen" },
+    { id: 2,  title: "Chanson 10",              artist: "Chanson 10",                    audio: "audio/chanson02.mp3", collab: "Aurélie Audo" },
+    { id: 3,  title: "Storm II",                artist: "Genera8ion",                    audio: "audio/chanson03.mp3", collab: "Aurélie Bernable" },
+    { id: 4,  title: "Goon Flavour",            artist: "Master KG & Eemoh, Ngishutheni",audio: "audio/chanson04.mp3", collab: "Christophe Garnier" },
+    { id: 5,  title: "Pilé",                    artist: "Mauvais Djo",                   audio: "audio/chanson05.mp3", collab: "Daniel Miyavanga" },
+    { id: 6,  title: "Beauty and a Beat",       artist: "Justin Bieber & Nicki Minaj",   audio: "audio/chanson06.mp3", collab: "Laetitia Lemoine" },
+    { id: 7,  title: "Soleil Bleu",             artist: "Bleu Soleil & Luiza",           audio: "audio/chanson07.mp3", collab: "Laetitia Vicente" },
+    { id: 8,  title: "Chanson 9",               artist: "Chanson 9",                     audio: "audio/chanson08.mp3", collab: "Laurellène Dérambure" },
+    { id: 9,  title: "Ritmo",                   artist: "Black Eyed Peas",               audio: "audio/chanson09.mp3", collab: "Michel Pastural" },
+    { id: 10, title: "Baile INoLVIDABLE",       artist: "Bad Bunny",                     audio: "audio/chanson10.mp3", collab: "Sébastien Bloch" },
+  ];
+
+  const LEVEL2 = [
+    { id: 11, title: "À l'aise",                      artist: "Triangle des Bermudes ft L2b", audio: "audio/chanson11.mp3", collab: "Chaney Kitoko" },
+    { id: 12, title: "DtMF",                           artist: "Bad Bunny",                    audio: "audio/chanson12.mp3", collab: "Clara Kenig" },
+    { id: 13, title: "Limbo",                          artist: "Daddy Yankee",                 audio: "audio/chanson13.mp3", collab: "Coralie Colin" },
+    { id: 14, title: "Somebody That I Used To Know",   artist: "Three Days Grace",             audio: "audio/chanson14.mp3", collab: "Dorian Viglione" },
+    { id: 15, title: "Mas Cara",                       artist: "Bad Gyal",                     audio: "audio/chanson15.mp3", collab: "Emilie" },
+    { id: 16, title: "Chanson 10",                     artist: "Chanson 10",                   audio: "audio/chanson16.mp3", collab: "Loubna El Msakad" },
+    { id: 17, title: "Favorita",                       artist: "Ozuna",                        audio: "audio/chanson17.mp3", collab: "Manon Thoumieux" },
+    { id: 18, title: "Sous la lune",                   artist: "JUL",                          audio: "audio/chanson18.mp3", collab: "Pénéloppe Guillemin" },
+    { id: 19, title: "Water",                          artist: "Tyla",                         audio: "audio/chanson19.mp3", collab: "Vélizar Il Chev" },
+    { id: 20, title: "Chanson 20",                     artist: "Artiste 20",                   audio: "audio/chanson20.mp3", collab: "Collab 20" },
   ];
   // ============================================================
 
-  const NAMES = [...SONGS.map(s => s.collab)].sort(() => Math.random() - 0.5);
+  const PHRASES = {
+    1: [
+      { max: 2,  phrase: "Tu passes trop de temps en réunion et pas assez à la machine à café 😅" },
+      { max: 5,  phrase: "Tu connais quelques visages... mais les prénoms c'est une autre histoire 😄" },
+      { max: 8,  phrase: "Tu traînes clairement à la pause déj — et ça se voit 👀" },
+      { max: 10, phrase: "Expert(e) ACOFI certifié(e) — soit tu connais vraiment tout le monde, soit tu as triché 🕵️" },
+    ],
+    2: [
+      { max: 2,  phrase: "Sérieusement ? Même pas 3 sur 10... tu bosses vraiment en télétravail toi 🏠" },
+      { max: 5,  phrase: "Moyen. On sent que tu dis bonjour dans le couloir mais que tu retiens pas les noms 😬" },
+      { max: 8,  phrase: "Pas mal pour quelqu'un qui prétend ne pas faire de politique de couloir 😏" },
+      { max: 10, phrase: "10/10 ? On va juste vérifier que t'as pas fouillé les dossiers RH 📂" },
+    ],
+  };
+
+  const TITLES = {
+    1: ["Aïe...", "Pas mal !", "Belle performance !", "Expert(e) ACOFI certifié(e) !"],
+    2: ["Aïe...", "Moyen...", "Belle performance !", "Suspect(e) !"],
+  };
+
   let currentAudio = null;
   let currentPlayBtn = null;
   let progressInterval = null;
-  let validated = false;
+  const validated = { 1: false, 2: false };
 
-  function renderSongs() {
-    document.getElementById('total').textContent = SONGS.length;
-    const container = document.getElementById('songs-container');
-    container.innerHTML = SONGS.map((song, i) => `
-      <div class="song-card" id="card-${song.id}">
+  function getNames(songs) {
+    return [...songs.map(s => s.collab)].sort(() => Math.random() - 0.5);
+  }
+
+  function renderLevel(levelNum, songs) {
+    const names = getNames(songs);
+    document.getElementById(`total-${levelNum}`).textContent = songs.length;
+    const container = document.getElementById(`songs-${levelNum}`);
+    container.innerHTML = songs.map((song, i) => `
+      <div class="song-card" id="card-${song.id}" style="animation-delay:${(i * 0.05).toFixed(2)}s">
         <div class="num-badge">${i + 1}</div>
         <div class="song-info">
           <div class="song-name">${song.title}</div>
           <div class="song-artist">${song.artist}</div>
         </div>
         <div class="card-controls">
-          <button class="play-btn" id="play-${song.id}" onclick="toggleAudio(${song.id})" title="Écouter l'extrait" aria-label="Écouter ${song.title}">
+          <button class="play-btn" id="play-${song.id}" data-song-id="${song.id}" onclick="toggleAudio(${song.id})" title="Écouter l'extrait">
             <svg id="icon-${song.id}" viewBox="0 0 16 16"><path d="M4 2l10 6-10 6V2z"/></svg>
           </button>
           <div class="progress-wrap"><div class="progress-fill" id="prog-${song.id}"></div></div>
-          <select id="sel-${song.id}" aria-label="Choisir le collègue pour ${song.title}" onchange="updateSelects()">
+          <select id="sel-${song.id}" onchange="updateSelects(${levelNum})" aria-label="Choisir le collègue pour ${song.title}">
             <option value="">— Qui est-ce ?</option>
-            ${NAMES.map(n => `<option value="${n}">${n}</option>`).join('')}
+            ${names.map(n => `<option value="${n}">${n}</option>`).join('')}
           </select>
-          <span class="check-mark" id="chk-${song.id}" aria-hidden="true">✓</span>
+          <span class="check-mark" id="chk-${song.id}">✓</span>
         </div>
       </div>
     `).join('');
   }
 
-  function updateSelects() {
-    const selected = SONGS
+  function updateSelects(levelNum) {
+    const songs = levelNum === 1 ? LEVEL1 : LEVEL2;
+    const selected = songs
       .map(s => document.getElementById(`sel-${s.id}`)?.value)
-      .filter(v => v !== '' && v !== undefined);
+      .filter(v => v && v !== '');
 
-    SONGS.forEach(song => {
+    songs.forEach(song => {
       const sel = document.getElementById(`sel-${song.id}`);
       if (!sel || sel.disabled) return;
       const current = sel.value;
@@ -462,14 +527,8 @@
   }
 
   function stopCurrent() {
-    if (currentAudio) {
-      currentAudio.pause();
-      currentAudio = null;
-    }
-    if (progressInterval) {
-      clearInterval(progressInterval);
-      progressInterval = null;
-    }
+    if (currentAudio) { currentAudio.pause(); currentAudio = null; }
+    if (progressInterval) { clearInterval(progressInterval); progressInterval = null; }
     if (currentPlayBtn) {
       const id = currentPlayBtn.dataset.songId;
       currentPlayBtn.classList.remove('playing');
@@ -481,12 +540,10 @@
 
   function toggleAudio(id) {
     const btn = document.getElementById(`play-${id}`);
-    btn.dataset.songId = id;
-
     if (currentPlayBtn === btn) { stopCurrent(); return; }
     stopCurrent();
 
-    const song = SONGS.find(s => s.id === id);
+    const song = [...LEVEL1, ...LEVEL2].find(s => s.id === id);
     const audio = new Audio(song.audio);
 
     audio.addEventListener('canplay', () => {
@@ -495,13 +552,11 @@
       currentPlayBtn = btn;
       btn.classList.add('playing');
       document.getElementById(`icon-${id}`).innerHTML = '<path d="M3 2h3v12H3zm7 0h3v12h-3z"/>';
-
       let elapsed = 0;
       progressInterval = setInterval(() => {
         elapsed += 0.5;
-        const pct = Math.min((elapsed / 30) * 100, 100);
-        document.getElementById(`prog-${id}`).style.width = pct + '%';
-        if (elapsed >= 30) { stopCurrent(); }
+        document.getElementById(`prog-${id}`).style.width = Math.min(elapsed / 30 * 100, 100) + '%';
+        if (elapsed >= 30) stopCurrent();
       }, 500);
     });
 
@@ -513,17 +568,16 @@
     audio.load();
   }
 
-  function validateAll() {
-    if (validated) return;
+  function validateLevel(levelNum) {
+    if (validated[levelNum]) return;
+    const songs = levelNum === 1 ? LEVEL1 : LEVEL2;
     let correct = 0;
-    let answered = 0;
 
-    SONGS.forEach(song => {
+    songs.forEach(song => {
       const sel = document.getElementById(`sel-${song.id}`);
       const card = document.getElementById(`card-${song.id}`);
       const chk = document.getElementById(`chk-${song.id}`);
       if (!sel.value) return;
-      answered++;
       card.classList.remove('wrong');
       void card.offsetWidth;
       if (sel.value === song.collab) {
@@ -536,45 +590,42 @@
       }
     });
 
-    document.getElementById('score').textContent = correct;
+    document.getElementById(`score-${levelNum}`).textContent = correct;
 
-    const banner = document.getElementById('result-banner');
-    const title = document.getElementById('result-title');
-    const text = document.getElementById('result-text');
+    const phrases = PHRASES[levelNum];
+    const titles = TITLES[levelNum];
+    const levelIndex = phrases.findIndex(p => correct <= p.max);
+    const phrase = phrases[levelIndex].phrase;
+    const title = titles[levelIndex];
 
-    const phrases = [
-      { max: 2,  emoji: "😅", titre: "Aïe...",            phrase: "Tu passes trop de temps en réunion et pas assez à la machine à café !" },
-      { max: 5,  emoji: "😄", titre: "Pas mal !",          phrase: "Tu connais quelques visages... mais les prénoms c'est une autre histoire." },
-      { max: 8,  emoji: "👀", titre: "Belle performance !", phrase: "Tu traînes clairement à la pause déj — et ça se voit !" },
-      { max: 10, emoji: "🕵️", titre: "Expert(e) ACOFI certifié(e) !", phrase: "Soit tu connais vraiment tout le monde, soit tu as triché. On ne juge pas." },
-    ];
-    const level = phrases.find(p => correct <= p.max);
+    const banner = document.getElementById(`banner-${levelNum}`);
+    banner.className = correct === songs.length ? 'result-banner success' : 'result-banner partial';
+    document.getElementById(`banner-title-${levelNum}`).textContent = `${correct}/${songs.length} — ${title}`;
+    document.getElementById(`banner-text-${levelNum}`).textContent = phrase;
+    banner.style.display = 'block';
+    document.getElementById(`btn-reset-${levelNum}`).style.display = 'inline-block';
 
-    if (correct === SONGS.length) {
-      validated = true;
-      document.getElementById('btn-validate').disabled = true;
+    if (correct === songs.length) {
+      validated[levelNum] = true;
+      document.getElementById(`btn-validate-${levelNum}`).disabled = true;
     }
 
-    banner.className = correct === SONGS.length ? 'result-banner success' : 'result-banner partial';
-    title.textContent = `${level.emoji} ${correct}/${SONGS.length} — ${level.titre}`;
-    text.textContent = level.phrase;
-
-    banner.style.display = 'block';
-    document.getElementById('btn-reset').style.display = 'inline-block';
     banner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
-  function resetGame() {
+  function resetLevel(levelNum) {
     stopCurrent();
-    validated = false;
-    renderSongs();
-    document.getElementById('score').textContent = '0';
-    document.getElementById('result-banner').style.display = 'none';
-    document.getElementById('btn-validate').disabled = false;
-    document.getElementById('btn-reset').style.display = 'none';
+    validated[levelNum] = false;
+    const songs = levelNum === 1 ? LEVEL1 : LEVEL2;
+    renderLevel(levelNum, songs);
+    document.getElementById(`score-${levelNum}`).textContent = '0';
+    document.getElementById(`banner-${levelNum}`).style.display = 'none';
+    document.getElementById(`btn-validate-${levelNum}`).disabled = false;
+    document.getElementById(`btn-reset-${levelNum}`).style.display = 'none';
   }
 
-  renderSongs();
+  renderLevel(1, LEVEL1);
+  renderLevel(2, LEVEL2);
 </script>
 </body>
 </html>
